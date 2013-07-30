@@ -7,11 +7,6 @@ Vagrant.configure('2') do |config|
   # Forward Oracle port
   config.vm.network :forwarded_port, guest: 1521, host: 1521
 
-  config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = 'puppet/manifests'
-    puppet.module_path    = 'puppet/modules'
-  end
-
   # Provider-specific configuration so you can fine-tune various backing
   # providers for Vagrant. These expose provider-specific options.
   config.vm.provider :virtualbox do |vb|

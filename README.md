@@ -22,7 +22,11 @@ Building the virtual machine is this easy:
     host $ git clone https://github.com/yahonda/rails-dev-box-runs-oracle.git
     host $ cp oracle-xe-11.2.0-1.0.x86_64.rpm.zip rails-dev-box-runs-oracle/puppet/modules/oracle/files/.
     host $ cd rails-dev-box-runs-oracle
+    host $ git checkout delayed_provisioning
     host $ vagrant up
+    host $ vagrant ssh
+    vagrant@rails-dev-box:~$ sudo puppet apply /vagrant/puppet/manifests/default.pp --modulepath=/vagrant/puppet/modules/
+
 ```
 
 That's it.
