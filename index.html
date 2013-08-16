@@ -116,7 +116,7 @@ vagrant@rails-dev-box:/vagrant/rails/activerecord$ rake test_oracle
 <pre><code>host $ ls
 README.md   Vagrantfile puppet rails
 
-host $ git clone -b gemfile_master https://github.com/yahonda/oracle-enhanced.git oracle-enhanced
+host $ git clone https://github.com/rsim/oracle-enhanced.git
 
 host $ ls
 oracle-enhanced README.md   Vagrantfile puppet rails
@@ -128,7 +128,7 @@ oracle-enhanced README.md   Vagrantfile puppet rails
 <p>Just execute as described steps below. </p>
 
 <pre><code>vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
-vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_PATH=/vagrant/rails
+vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_VERSION=3.2.14
 vagrant@rails-dev-box:/vagrant/oracle-enhanced$ bundle
 vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
 </code></pre>
