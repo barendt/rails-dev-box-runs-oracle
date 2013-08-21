@@ -109,7 +109,7 @@ vagrant@rails-dev-box:/vagrant/rails/activerecord$ rake test_oracle
 </code></pre>
 
 <h2>
-<a name="how-to-clone-the-oracle-enhancedd-repository-and-execute-unit-tests" class="anchor" href="#how-to-clone-the-oracle-enhancedd-repository-and-execute-unit-tests"><span class="octicon octicon-link"></span></a>How to clone the Oracle enhancedd repository and execute unit tests</h2>
+<a name="how-to-clone-the-oracle-enhanced-repository-and-execute-unit-tests" class="anchor" href="#how-to-clone-the-oracle-enhanced-repository-and-execute-unit-tests"><span class="octicon octicon-link"></span></a>How to clone the Oracle enhanced repository and execute unit tests</h2>
 
 <p>Clone the oracle-enhanced repository as you do Rails.</p>
 
@@ -136,7 +136,43 @@ vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
 <h2>
 <a name="how-about-rails-40" class="anchor" href="#how-about-rails-40"><span class="octicon octicon-link"></span></a>How about Rails 4.0?</h2>
 
-<p>As of right now Testing Rails 4.0.x and newer version of rails is not straightforward and needs a lot of help. This is the reason why rails-dev-box-runs-oracle is there. Will update these steps soon.</p>
+<p>Compared with Rails 3.2 tests, Rails 4 still have some failures. This is the reason why rails-dev-box-runs-oracle is there. Here are steps to execute unit tests with Rails 4. Enjoy!</p>
+
+<h2>
+<a name="how-to-clone-rails-repositories-and-execute-unit-tests-1" class="anchor" href="#how-to-clone-rails-repositories-and-execute-unit-tests-1"><span class="octicon octicon-link"></span></a>How to clone Rails repositories and execute unit tests</h2>
+
+<p>Just clone your Rails fork in the very directory of the Rails development box in the host computer:</p>
+
+<pre><code>host $ ls
+README.md   Vagrantfile puppet
+host $ git clone -b 4-0-stable https://github.com/rails/rails.git rails
+host $ git clone https://github.com/rsim/oracle-enhanced.git
+</code></pre>
+
+<h2>
+<a name="execute-activerecord-4-unit-tests-with-oracle-enhanced-adapter" class="anchor" href="#execute-activerecord-4-unit-tests-with-oracle-enhanced-adapter"><span class="octicon octicon-link"></span></a>Execute ActiveRecord 4 unit tests with Oracle enhanced adapter</h2>
+
+<p>Just execute as described steps below. </p>
+
+<pre><code>vagrant@rails-dev-box:~$ bundle config local.activerecord-oracle_enhanced-adapter /vagrant/oracle-enhanced
+vagrant@rails-dev-box:~$ bundle config disable_local_branch_check true
+vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
+vagrant@rails-dev-box:/vagrant/oracle-enhanced$ git checkout rails4
+vagrant@rails-dev-box:/vagrant/oracle-enhanced$ cd /vagrant/rails/activerecord
+vagrant@rails-dev-box:/vagrant/rails/activerecord$ bundle
+vagrant@rails-dev-box:/vagrant/rails/activerecord$ rake test_oracle
+</code></pre>
+
+<h2>
+<a name="how-to-execute-oracle-enhanced-adapter-unit-tests-with-rails-400" class="anchor" href="#how-to-execute-oracle-enhanced-adapter-unit-tests-with-rails-400"><span class="octicon octicon-link"></span></a>How to execute Oracle enhanced adapter unit tests with Rails 4.0.0</h2>
+
+<p>Just execute as described steps below. </p>
+
+<pre><code>vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
+vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_VERSION=4.0.0
+vagrant@rails-dev-box:/vagrant/oracle-enhanced$ bundle
+vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
+</code></pre>
 
 <h2>
 <a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
