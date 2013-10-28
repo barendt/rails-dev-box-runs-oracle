@@ -53,7 +53,7 @@
 
 <ul>
 <li>Download <a href="http://www.oracle.com/technetwork/products/express-edition/overview/index.html">Oracle Database 11g Express Edition</a> for Linux x64. The file name is <code>oracle-xe-11.2.0-1.0.x86_64.rpm.zip</code>.</li>
-</ul><div class="highlight"><pre>    host <span class="nv">$ </span>git clone https://github.com/yahonda/rails-dev-box-runs-oracle.git
+</ul><div class="highlight highlight-sh"><pre>    host <span class="nv">$ </span>git clone https://github.com/yahonda/rails-dev-box-runs-oracle.git
     host <span class="nv">$ </span>cp oracle-xe-11.2.0-1.0.x86_64.rpm.zip rails-dev-box-runs-oracle/puppet/modules/oracle/files/.
     host <span class="nv">$ </span><span class="nb">cd </span>rails-dev-box-runs-oracle
     host <span class="nv">$ </span>vagrant up
@@ -63,7 +63,7 @@
 
 <p>After the installation has finished, you can access the virtual machine with:</p>
 
-<div class="highlight"><pre>    host <span class="nv">$ </span>vagrant ssh
+<div class="highlight highlight-sh"><pre>    host <span class="nv">$ </span>vagrant ssh
     Welcome to Ubuntu 12.04 LTS <span class="o">(</span>GNU/Linux 3.2.0-23-generic x86_64<span class="o">)</span>
     ...
     vagrant@rails-dev-box:~<span class="nv">$ </span>sqlplus system/manager@localhost/XE
@@ -73,7 +73,7 @@
 
 <p>Similarly, Oracle's default network listener port 1521 in the host computer is forwarded to port 1521 in the virtual machine. Oracle tools in the host computer can connect to the database in the virtual machine:</p>
 
-<div class="highlight"><pre>    host <span class="nv">$ </span>sqlplus system/manager@localhost/XE
+<div class="highlight highlight-sh"><pre>    host <span class="nv">$ </span>sqlplus system/manager@localhost/XE
 </pre></div>
 
 <h2>
@@ -83,13 +83,13 @@
 <li><p>Everthing in <a href="https://github.com/rails/rails-dev-box">rails-dev-box</a></p></li>
 <li><p>Oracle Database 11g Express Edition</p></li>
 </ul><h2>
-<a name="how-to-clone-rails-repositories-and-execute-unit-tests" class="anchor" href="#how-to-clone-rails-repositories-and-execute-unit-tests"><span class="octicon octicon-link"></span></a>How to clone Rails repositories and execute unit tests</h2>
+<a name="how-to-clone-rails-repositories" class="anchor" href="#how-to-clone-rails-repositories"><span class="octicon octicon-link"></span></a>How to clone Rails repositories</h2>
 
 <p>Just clone your Rails fork in the very directory of the Rails development box in the host computer:</p>
 
 <pre><code>host $ ls
 README.md   Vagrantfile puppet
-host $ git clone -b 3-2-stable https://github.com/rails/rails.git rails
+host $ git clone https://github.com/rails/rails.git
 </code></pre>
 
 <p>Vagrant mounts that very directory as <em>/vagrant</em> within the virtual machine:</p>
@@ -99,17 +99,7 @@ puppet  rails  README.md  Vagrantfile
 </code></pre>
 
 <h2>
-<a name="execute-activerecord-32-unit-tests-with-oracle-enhanced-adapter" class="anchor" href="#execute-activerecord-32-unit-tests-with-oracle-enhanced-adapter"><span class="octicon octicon-link"></span></a>Execute ActiveRecord 3.2 unit tests with Oracle enhanced adapter</h2>
-
-<p>Just execute as described steps below. </p>
-
-<pre><code>vagrant@rails-dev-box:~$ cd /vagrant/rails/activerecord
-vagrant@rails-dev-box:/vagrant/rails/activerecord$ bundle
-vagrant@rails-dev-box:/vagrant/rails/activerecord$ rake test_oracle
-</code></pre>
-
-<h2>
-<a name="how-to-clone-the-oracle-enhanced-repository-and-execute-unit-tests" class="anchor" href="#how-to-clone-the-oracle-enhanced-repository-and-execute-unit-tests"><span class="octicon octicon-link"></span></a>How to clone the Oracle enhanced repository and execute unit tests</h2>
+<a name="how-to-clone-the-oracle-enhanced-repository" class="anchor" href="#how-to-clone-the-oracle-enhanced-repository"><span class="octicon octicon-link"></span></a>How to clone the Oracle enhanced repository</h2>
 
 <p>Clone the oracle-enhanced repository as you do Rails.</p>
 
@@ -123,55 +113,26 @@ oracle-enhanced README.md   Vagrantfile puppet rails
 </code></pre>
 
 <h2>
-<a name="execute-oracle-enhanced-adapter-unit-tests-with-rails-32x" class="anchor" href="#execute-oracle-enhanced-adapter-unit-tests-with-rails-32x"><span class="octicon octicon-link"></span></a>Execute Oracle enhanced adapter unit tests with Rails 3.2.x</h2>
+<a name="execute-oracle-enhanced-adapter-unit-tests-with-rails-4" class="anchor" href="#execute-oracle-enhanced-adapter-unit-tests-with-rails-4"><span class="octicon octicon-link"></span></a>Execute Oracle enhanced adapter unit tests with Rails 4</h2>
 
 <p>Just execute as described steps below. </p>
 
 <pre><code>vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
-vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_VERSION=3.2.14
+vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_VERSION=4.0.1.rc3
 vagrant@rails-dev-box:/vagrant/oracle-enhanced$ bundle
-vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
+vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rake spec
 </code></pre>
 
 <h2>
-<a name="how-about-rails-40" class="anchor" href="#how-about-rails-40"><span class="octicon octicon-link"></span></a>How about Rails 4.0?</h2>
-
-<p>Compared with Rails 3.2 tests, Rails 4 still have some failures. This is the reason why rails-dev-box-runs-oracle is there. Here are steps to execute unit tests with Rails 4. Enjoy!</p>
-
-<h2>
-<a name="how-to-clone-rails-repositories-and-execute-unit-tests-1" class="anchor" href="#how-to-clone-rails-repositories-and-execute-unit-tests-1"><span class="octicon octicon-link"></span></a>How to clone Rails repositories and execute unit tests</h2>
-
-<p>Just clone your Rails fork in the very directory of the Rails development box in the host computer:</p>
-
-<pre><code>host $ ls
-README.md   Vagrantfile puppet
-host $ git clone -b 4-0-stable https://github.com/rails/rails.git rails
-host $ git clone https://github.com/rsim/oracle-enhanced.git
-</code></pre>
-
-<h2>
-<a name="execute-activerecord-4-unit-tests-with-oracle-enhanced-adapter" class="anchor" href="#execute-activerecord-4-unit-tests-with-oracle-enhanced-adapter"><span class="octicon octicon-link"></span></a>Execute ActiveRecord 4 unit tests with Oracle enhanced adapter</h2>
+<a name="execute-activerecord-4-unit-tests" class="anchor" href="#execute-activerecord-4-unit-tests"><span class="octicon octicon-link"></span></a>Execute ActiveRecord 4 unit tests</h2>
 
 <p>Just execute as described steps below. </p>
 
-<pre><code>vagrant@rails-dev-box:~$ bundle config local.activerecord-oracle_enhanced-adapter /vagrant/oracle-enhanced
-vagrant@rails-dev-box:~$ bundle config disable_local_branch_check true
-vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
-vagrant@rails-dev-box:/vagrant/oracle-enhanced$ git checkout rails4
-vagrant@rails-dev-box:/vagrant/oracle-enhanced$ cd /vagrant/rails/activerecord
-vagrant@rails-dev-box:/vagrant/rails/activerecord$ bundle
-vagrant@rails-dev-box:/vagrant/rails/activerecord$ rake test_oracle
-</code></pre>
-
-<h2>
-<a name="how-to-execute-oracle-enhanced-adapter-unit-tests-with-rails-400" class="anchor" href="#how-to-execute-oracle-enhanced-adapter-unit-tests-with-rails-400"><span class="octicon octicon-link"></span></a>How to execute Oracle enhanced adapter unit tests with Rails 4.0.0</h2>
-
-<p>Just execute as described steps below. </p>
-
-<pre><code>vagrant@rails-dev-box:~$ cd /vagrant/oracle-enhanced
-vagrant@rails-dev-box:/vagrant/oracle-enhanced $ export RAILS_GEM_VERSION=4.0.0
-vagrant@rails-dev-box:/vagrant/oracle-enhanced$ bundle
-vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
+<pre><code>vagrant@rails-dev-box:~$ cd /vagrant/rails/activerecord
+vagrant@rails-dev-box:~$ git checkout v4.0.1.rc3
+vagrant@rails-dev-box:~$ git config --global url."https://".insteadOf git://
+vagrant@rails-dev-box:~$ bundle
+vagrant@rails-dev-box:~$ rake test_oracle
 </code></pre>
 
 <h2>
@@ -179,7 +140,7 @@ vagrant@rails-dev-box:/vagrant/oracle-enhanced$ rspec
 
 <p>If your host is behind a firewall and 'vagrant up' gets errors running apt-get or installing RVM, then create ~/.vagrant.d/Vagrantfile to update the virtual machine's proxy settings:</p>
 
-<div class="highlight"><pre>    <span class="c"># ~/.vagrant.d/Vagrantfile</span>
+<div class="highlight highlight-sh"><pre>    <span class="c"># ~/.vagrant.d/Vagrantfile</span>
     Vagrant.configure<span class="o">(</span><span class="s1">'2'</span><span class="o">)</span> <span class="k">do</span> |config|
       config.vm.provision :shell, :inline <span class="o">=</span>&gt; <span class="s2">"echo 'Acquire::http::proxy \"http://proxy.example.com:80/\";' &gt;&gt; /etc/apt/apt.conf"</span>
       config.vm.provision :shell, :inline <span class="o">=</span>&gt; <span class="s2">"echo 'Acquire::https::proxy \"http://proxy.example.com:80/\";' &gt;&gt; /etc/apt/apt.conf"</span>
